@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Angularjs Dynamic Form Validation Example</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+    	.field-error{
+    		color:red;
+    		font-weight: bold;
+    	}
+    </style>
+</head>
+
+<body ng-app="app">
+
+    <div class="content">
+        <div class="well">
+        	<h3>Angularjs Dynamic Form Validation Example</h3> 
+            <form name="form" ng-controller="FormController as myForm">
+                <div class="form-group col-md-12" ng-repeat="field in myForm.fields">
+                	<span class="form-label">{{field.label}}</span>
+                	
+                    <input type="{{field.type}}" 
+                    	   title="{{field.label}}" 
+                    	   ng-model="myForm[field.name]" 
+                    	   class="form-control" 
+                    	   validator-error-field="field.label"
+                    	   validator-rules="field.rules" 
+                    	   validator-error="field.error"
+                    	   validator-function="myForm.fieldIsInvalid"
+                	   />
+                	 <ul class="field-error" ng-repeat="error in field.error">
+                		<li>{{error}}</li>
+                	</ul>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+    <script src="example.js"></script>
+    <script src="validator.js"></script>
+</body>
+
+</html>
